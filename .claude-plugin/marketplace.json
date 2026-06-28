@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "humanise",
+  "description": "Make Claude Code output read human-written: no LLM em dashes, no emojis, no AI-overused words.",
+  "owner": {
+    "name": "vbalafas",
+    "url": "https://github.com/innovationbee"
+  },
+  "plugins": [
+    {
+      "name": "humanise",
+      "description": "De-LLM your output. Steer prose + deterministically lint written files.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

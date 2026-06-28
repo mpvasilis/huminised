@@ -1,0 +1,35 @@
+{
+  "name": "humanise",
+  "description": "Strip LLM 'tells' from output. Steers prose to read human-written and deterministically cleans em dashes, smart quotes, emojis, and AI-overused words from any file Claude writes.",
+  "author": {
+    "name": "vbalafas",
+    "url": "https://github.com/innovationbee"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/humanise-activate.js",
+            "timeout": 5,
+            "statusMessage": "Loading humanise mode..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/humanise-posttool.js",
+            "timeout": 10,
+            "statusMessage": "Humanising written file..."
+          }
+        ]
+      }
+    ]
+  }
+}

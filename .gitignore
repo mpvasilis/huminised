@@ -1,0 +1,13 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# node (none committed, but just in case)
+node_modules/
+npm-debug.log*
+
+# runtime flag lives in ~/.claude, never in the repo
+.humanise-active

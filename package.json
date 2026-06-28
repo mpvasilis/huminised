@@ -1,0 +1,45 @@
+{
+  "name": "humanise",
+  "version": "1.0.0",
+  "description": "Strip LLM tells from text. Auto-fixes em dashes, smart quotes, ellipses, emojis and zero-width spaces; flags AI-overused words, cliche phrases and robotic rhythm. CLI + library. Also ships as a Claude Code plugin.",
+  "bin": {
+    "humanise": "hooks/humanise-lint.js"
+  },
+  "main": "hooks/humanise-lint.js",
+  "files": [
+    "hooks/humanise-lint.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node scripts/run-experiments.js"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "keywords": [
+    "llm",
+    "ai",
+    "humanise",
+    "humanize",
+    "em-dash",
+    "ai-detector",
+    "de-ai",
+    "text",
+    "linter",
+    "cli",
+    "chatgpt",
+    "claude",
+    "writing"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpvasilis/huminised.git"
+  },
+  "homepage": "https://github.com/mpvasilis/huminised#readme",
+  "bugs": {
+    "url": "https://github.com/mpvasilis/huminised/issues"
+  },
+  "author": "Vasilis Balafas",
+  "license": "MIT"
+}

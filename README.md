@@ -44,7 +44,28 @@ The plugin must never corrupt generated code. The PostToolUse hook was run for r
 
 Pure code files (`.js`, `.py`, `.ts`, ...) are never touched. Markdown is cleaned, but fenced and inline code is masked first, so code samples in docs survive intact.
 
-## Install
+## Use as an npm CLI (no Claude Code needed)
+
+The linter ships as a standalone package. Use it in CI, editors, git hooks, or any script.
+
+```bash
+npx humanise file.md                 # report tells
+npx humanise --fix file.md           # clean in place
+npx humanise --fix --stdout file.md  # print cleaned text
+echo "robust and seamless — really." | npx humanise --fix
+```
+
+Or as a library:
+
+```js
+const { fixChars, findWarnings } = require("humanise");
+const { text, changes } = fixChars(raw);   // deterministic char cleanup
+const warnings = findWarnings(text);        // AI words, cliches, rhythm
+```
+
+The same `hooks/humanise-lint.js` powers both the npm CLI and the Claude Code plugin.
+
+## Install (as a Claude Code plugin)
 
 Local, for development:
 

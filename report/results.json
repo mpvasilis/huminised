@@ -1,0 +1,133 @@
+{
+  "generatedAt": "2026-06-28",
+  "prose": [
+    {
+      "key": "marketing",
+      "title": "Marketing landing copy",
+      "raw": {
+        "text": "# Boost Your Team's Productivity\n\nIn today's fast-paced digital landscape, productivity isn't just about working harder — it's about working \"smarter\". Our cutting-edge platform empowers teams to seamlessly streamline their workflows and unlock their full potential. 🚀\n\nWhether you're a solo founder or a scaling enterprise, our comprehensive suite of tools is meticulously designed to foster collaboration and elevate your output. By leveraging robust automation, you can delve into what truly matters… building a product your customers love.\n\nIt's worth noting that the modern landscape is ever-evolving. Rest assured, our intuitive interface delivers a seamless experience, cutting setup time by 10–20 percent. ✅\n\nReady to embark on this journey? Don't just take our word for it — dive in and discover the myriad benefits today.\n",
+        "chars": 6,
+        "words": 18,
+        "cliches": 5,
+        "wc": 125,
+        "sd": 5.5
+      },
+      "layer1Chars": 0,
+      "steered": {
+        "text": "# Boost Your Team's Productivity\n\nMost productivity tools just add more buttons. Ours cuts steps instead.\n\nYou write a task once. It routes itself, pulls in the right people, and gets out of your way. Solo founder or a team of fifty, the setup is the same: about ten minutes, and most of that is you deciding what to hand off.\n\nWe measured it. New teams hit their first finished workflow 10-20 percent faster than they did on their old stack.\n\nSo skip the demo. Start a free project and push a real task through it. If it hasn't saved you an afternoon by the end of week one, close the tab.\n",
+        "chars": 0,
+        "words": 0,
+        "cliches": 0,
+        "wc": 112,
+        "sd": 7
+      }
+    },
+    {
+      "key": "techblog",
+      "title": "Technical blog intro",
+      "raw": {
+        "text": "# Understanding Database Indexing\n\nIn today's data-driven world, database performance is more crucial than ever. As applications scale, navigating the complexities of query optimization becomes a pivotal challenge for engineering teams. In this comprehensive guide, we'll delve into the intricacies of database indexing and explore how you can leverage it to supercharge your queries.\n\nAt its core, an index is a powerful data structure that empowers the database to locate rows without scanning the entire table. It's worth noting that, while indexes can dramatically elevate read performance, they don't come without trade-offs. Ultimately, fostering a holistic understanding of these mechanisms is essential for building robust, scalable systems.\n",
+        "chars": 0,
+        "words": 12,
+        "cliches": 2,
+        "wc": 107,
+        "sd": 3.3
+      },
+      "layer1Chars": 0,
+      "steered": {
+        "text": "# Understanding Database Indexing\n\nAn index is a lookup table for your rows. Without one, the database reads every row to answer a query. With one, it jumps straight to the matches.\n\nThat speed isn't free. Every index you add is another structure the database updates on each write, and it eats disk. So the rule of thumb is simple: index the columns you filter and join on, nothing else.\n\nThe rest of this guide walks through how a B-tree index actually works, when it helps, and the three cases where it quietly makes things slower.\n",
+        "chars": 0,
+        "words": 0,
+        "cliches": 0,
+        "wc": 96,
+        "sd": 6.6
+      }
+    },
+    {
+      "key": "coldemail",
+      "title": "Cold outreach email",
+      "raw": {
+        "text": "Subject: Unlock Your Team's Full Potential 🚀\n\nHi Alex,\n\nI hope this email finds you well. In today's fast-paced business landscape, I wanted to reach out about a game-changing opportunity. Our cutting-edge platform empowers teams like yours to seamlessly streamline operations and elevate productivity.\n\nWhether you're looking to optimize workflows or foster better collaboration, our comprehensive solution is meticulously designed to deliver unparalleled results. Rest assured, countless teams have already leveraged our tools to unlock tremendous value.\n\nWould you be open to a quick call to delve into how we can help? Looking forward to embarking on this journey together!\n\nBest regards,\nSam\n",
+        "chars": 1,
+        "words": 15,
+        "cliches": 2,
+        "wc": 103,
+        "sd": 4.9
+      },
+      "layer1Chars": 0,
+      "steered": {
+        "text": "Subject: cutting your onboarding from 3 weeks to 4 days\n\nHi Alex,\n\nSaw Acme just doubled the support team. New hires usually mean weeks of someone shadowing someone else before they're any use.\n\nWe fixed that for Linear and Vercel. Their reps hit full ramp in four days instead of three weeks, because the playbooks live inside the tool instead of a wiki nobody opens.\n\nWorth 15 minutes next week? If not, no hard feelings and I'll stop emailing.\n\nSam\n",
+        "chars": 0,
+        "words": 0,
+        "cliches": 0,
+        "wc": 80,
+        "sd": 7
+      }
+    },
+    {
+      "key": "changelog",
+      "title": "Product changelog",
+      "raw": {
+        "text": "# What's New\n\nWe're thrilled to announce a host of exciting updates! This release is a testament to our commitment to continuous improvement and innovation.\n\nFirst, we've revolutionized the dashboard with a sleek, intuitive interface that empowers you to navigate your data effortlessly. Additionally, our new automation engine leverages cutting-edge technology to streamline your most tedious workflows.\n\nMoreover, we've meticulously optimized performance across the board, delivering a seamless experience that's faster than ever. We can't wait for you to dive in and discover the myriad improvements!\n",
+        "chars": 0,
+        "words": 10,
+        "cliches": 1,
+        "wc": 86,
+        "sd": 2.1
+      },
+      "layer1Chars": 0,
+      "steered": {
+        "text": "# What's New\n\nThree things shipped this week.\n\nThe dashboard loads about twice as fast now. We rewrote the part that fetched every chart on page load, so it only pulls what's actually on screen.\n\nAutomation got a new trigger: \"when a deal closes\". A lot of you asked for this one. It's in the trigger dropdown, no setup needed.\n\nAnd we fixed the bug where exporting more than 10,000 rows timed out. It doesn't anymore.\n",
+        "chars": 0,
+        "words": 0,
+        "cliches": 0,
+        "wc": 76,
+        "sd": 4.4
+      }
+    }
+  ],
+  "code": [
+    {
+      "file": "code/snippet.js",
+      "kind": "code file",
+      "codeIntact": true,
+      "fileUnchanged": true,
+      "proseCleaned": null,
+      "pass": true
+    },
+    {
+      "file": "code/snippet.py",
+      "kind": "code file",
+      "codeIntact": true,
+      "fileUnchanged": true,
+      "proseCleaned": null,
+      "pass": true
+    },
+    {
+      "file": "code/config.ts",
+      "kind": "code file",
+      "codeIntact": true,
+      "fileUnchanged": true,
+      "proseCleaned": null,
+      "pass": true
+    },
+    {
+      "file": "code/doc-with-code.md",
+      "kind": "markdown w/ code",
+      "codeIntact": true,
+      "fileUnchanged": false,
+      "proseCleaned": true,
+      "pass": true
+    }
+  ],
+  "totals": {
+    "rawChars": 7,
+    "rawWords": 55,
+    "rawCliches": 10,
+    "steeredChars": 0,
+    "steeredWords": 0,
+    "steeredCliches": 0,
+    "codePass": 4,
+    "codeTotal": 4
+  }
+}

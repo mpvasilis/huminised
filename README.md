@@ -15,6 +15,35 @@ No Claude Code hook can rewrite the assistant's chat prose after the model gener
 
 **Flagged for review (never auto-rewritten):** AI-overused words (delve, leverage, robust, seamless, furthermore, tapestry, myriad...), cliche phrases ("it's worth noting", "in today's fast-paced world", "not only X but also Y"), and low sentence-length variance.
 
+## Results
+
+Measured across four writing genres (marketing, technical blog, cold email, changelog). All numbers come from `hooks/humanise-lint.js`. Full visual report: [`report/index.html`](report/index.html). Reproduce with `node scripts/run-experiments.js`.
+
+| Tell (totalled over 4 genres) | Plugin OFF (raw LLM) | Plugin ON (steered) |
+|---|---:|---:|
+| char-tells (em dashes, smart quotes, ellipses, emojis) | 7 | **0** |
+| AI-overused words | 55 | **0** |
+| cliche phrases | 10 | **0** |
+
+Example, one paragraph:
+
+> **OFF:** In today's fast-paced digital landscape, productivity isn't just about working harder — it's about working smarter. Our cutting-edge platform empowers teams to seamlessly streamline their workflows and unlock their full potential. 🚀
+>
+> **ON:** Most productivity tools just add more buttons. Ours cuts steps instead. You write a task once. It routes itself, pulls in the right people, and gets out of your way.
+
+### Code safety: 4/4 pass
+
+The plugin must never corrupt generated code. The PostToolUse hook was run for real over code files and a markdown doc with embedded code, each seeded with em dashes, smart quotes, ellipses and emojis inside the code:
+
+| File | Result |
+|---|---|
+| `experiments/code/snippet.js` | code untouched (skipped by extension) |
+| `experiments/code/snippet.py` | code untouched (skipped by extension) |
+| `experiments/code/config.ts` | code untouched (skipped by extension) |
+| `experiments/code/doc-with-code.md` | code blocks + inline code preserved byte-for-byte, prose cleaned |
+
+Pure code files (`.js`, `.py`, `.ts`, ...) are never touched. Markdown is cleaned, but fenced and inline code is masked first, so code samples in docs survive intact.
+
 ## Install
 
 Local, for development:
@@ -60,3 +89,7 @@ The report lists char-tells fixed, AI words with plain-word suggestions and line
 - `hooks/humanise-activate.js` — SessionStart steering.
 - `hooks/humanise-posttool.js` — PostToolUse file cleaner.
 - `hooks/humanise-config.js` — on/off flag.
+- `commands/humanise.md` — the `/humanise on|off|status` slash command.
+- `scripts/run-experiments.js` — runs the experiments and regenerates the report.
+- `experiments/` — raw vs human sample pairs and the code-safety fixtures.
+- `report/index.html` — the generated visual report (`report/results.json` has the raw numbers).

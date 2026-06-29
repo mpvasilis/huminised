@@ -6,13 +6,13 @@
 // Only touches prose files (.md/.markdown/.mdx/.txt) so code is never mangled.
 
 const fs = require('fs');
-const { getMode } = require('./humanise-config');
+const { isActive } = require('./humanise-config');
 const { humanise, findWarnings } = require('./humanise-lint');
 
 let input = '';
 process.stdin.on('data', d => (input += d));
 process.stdin.on('end', () => {
-  if (getMode() !== 'on') process.exit(0);
+  if (!isActive()) process.exit(0);
 
   let fp;
   try {

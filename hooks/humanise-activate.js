@@ -1,29 +1,38 @@
 #!/usr/bin/env node
 'use strict';
-// SessionStart hook. If humanise is "on", inject the ruleset as hidden context
-// so prose stays human across the whole session (survives compaction better than
-// a one-line summary). If "off", emit nothing meaningful and stay inert.
+// SessionStart hook. If humanise is active (light or full), inject the ruleset as
+// hidden context so prose stays human across the whole session. If off, stay inert.
 
 const fs = require('fs');
 const path = require('path');
 const { getMode } = require('./humanise-config');
 
-if (getMode() !== 'on') {
+const mode = getMode();
+if (mode === 'off') {
   process.stdout.write('OK');
   process.exit(0);
 }
 
+const header = 'HUMANISE MODE ACTIVE - level: ' + mode +
+  '. Edit out AI texture, but keep the author\'s meaning, facts, and voice exactly (Rule 0 below). ' +
+  (mode === 'light'
+    ? 'Light touch: fix characters, swap only obvious marketing words, cut only clear filler, keep structure and wording.'
+    : 'Full pass: also reshape rhythm and tighten, but never change meaning or drop information.') +
+  '\n\n';
+
 const FALLBACK =
-  'HUMANISE MODE ACTIVE - write so output reads human-authored.\n\n' +
-  'Kill AI characters: never use em/en dashes (use comma or a new sentence), no smart quotes, ' +
+  'Kill AI characters: never use em/en dashes (use comma, period, or rephrase), no smart quotes, ' +
   'no ellipsis char, no emojis, no non-breaking/zero-width spaces.\n' +
-  'Kill AI words: delve, leverage, utilize, robust, pivotal, seamless, comprehensive, crucial, ' +
-  'furthermore, moreover, additionally, underscore, testament, tapestry, landscape, realm, harness, ' +
-  'elevate, foster, unlock, myriad, plethora. Use plain words: use, key, smooth, full, also, show.\n' +
-  'Kill AI shapes: "not just X, it\'s Y", "in today\'s fast-paced world", "it\'s worth noting", ' +
-  '"in conclusion", rule-of-three everything.\n' +
-  'Vary sentence length hard. Use contractions. Cut hedging. Do not over-format. ' +
-  'Code, commits, and quoted errors stay exactly as-is. Off only on "stop humanise" / "normal mode".';
+  'Prefer plain words ONLY when they keep the same meaning: delve, leverage, utilize, robust, ' +
+  'seamless, comprehensive, furthermore, moreover, tapestry, realm, harness, elevate, unlock, myriad. ' +
+  'Keep the precise term if swapping would lose meaning.\n' +
+  'Relax AI shapes ("it\'s not just X, it\'s Y", "in today\'s fast-paced world", "in conclusion") by ' +
+  'rephrasing, not by deleting what they said.\n' +
+  'Rhythm: natural, not choppy. Keep connective words (because, so, but). Do not chop prose into ' +
+  'fragments. Vary sentence length where it reads naturally, not on a schedule.\n' +
+  'Rule 0: fidelity first. Never change meaning, never drop facts/numbers/caveats. If your version ' +
+  'says less than the original, revert toward the original. Code, commits, quoted errors stay as-is. ' +
+  'Off only on "stop humanise" / "normal mode".';
 
 let body = '';
 try {
@@ -31,6 +40,4 @@ try {
   body = skill.replace(/^---[\s\S]*?---\s*/, '').trim();
 } catch (e) { /* standalone install without skills dir: use fallback */ }
 
-process.stdout.write(body
-  ? 'HUMANISE MODE ACTIVE - write so output reads human-authored.\n\n' + body
-  : FALLBACK);
+process.stdout.write(header + (body || FALLBACK));

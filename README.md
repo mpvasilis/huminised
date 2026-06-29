@@ -78,17 +78,36 @@ Or wire the hooks directly in `~/.claude/settings.json` without the marketplace 
 
 ## Turn it on
 
-Default is off, so it never fights another style mode until you ask for it.
+Default is off, so it never fights another style mode until you ask for it. There are two levels:
 
-- Slash command: `/humanise on`, `/humanise off`, `/humanise status`. Plain `/humanise` turns it on.
-- Or set the flag directly:
+- **light** (recommended): fix characters, swap only the obvious marketing words, cut only clear filler. Keeps your structure, length, and wording. The smallest edit that removes the AI smell.
+- **full**: also reshapes choppy rhythm and tightens, but still never changes meaning.
 
-```bash
-node -e "require('./hooks/humanise-config').setMode('on')"   # on
-node -e "require('./hooks/humanise-config').setMode('off')"  # off
+```
+/humanise light     # gentle, keeps your wording (plain /humanise does this too)
+/humanise full      # stronger pass
+/humanise off
+/humanise status
 ```
 
-When on, the SessionStart hook steers chat prose and the PostToolUse hook cleans every `.md`/`.txt`/`.mdx` file Claude writes. Turning on mid-session activates file cleaning immediately; the slash command also tells the model to apply the prose rules right away (the SessionStart steering only injects at the next session start).
+Or set the flag directly:
+
+```bash
+node -e "require('./hooks/humanise-config').setMode('light')"  # light | full | off
+```
+
+When active, the SessionStart hook steers chat prose and the PostToolUse hook cleans every `.md`/`.txt`/`.mdx` file Claude writes. Changing level mid-session activates file cleaning immediately; the slash command also tells the model to apply the prose rules right away (the SessionStart steering only re-injects at the next session start).
+
+## Tuning the rewrites
+
+If a humanised reply changes your meaning or reads too choppy, the ruleset is built to prevent that, but you have direct levers:
+
+- **Drop to light.** `/humanise light` keeps your wording and only removes the obvious tells. This is the default for a reason.
+- **Rule 0 is fidelity first.** The skill instructs the model to never change meaning, never drop facts or caveats, and keep your precise words (it keeps "robust" when you mean fault-tolerant). A rewrite that says less than your original is treated as a mistake to undo.
+- **Just ask.** Say "lighter touch" or "keep it closer to my original" and it will back off for that reply.
+- **The deterministic file-clean never touches meaning** — it only fixes characters and *flags* words for you to decide. It never swaps words on its own.
+
+After editing the plugin, run `claude plugin update humanise` so your global install picks up the changes.
 
 ## Test it
 

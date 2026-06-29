@@ -95,7 +95,7 @@ fs.mkdirSync(tmp, { recursive: true });
 const prevMode = cfg.getMode();
 const code = [];
 try {
-  cfg.setMode('on'); // hook only acts when on
+  cfg.setMode('full'); // hook only acts when active
   for (const rel of CODE_FILES) {
     const src = path.join(EXP, rel);
     const dst = path.join(tmp, path.basename(rel));
@@ -121,7 +121,7 @@ try {
     });
   }
 } finally {
-  cfg.setMode(prevMode === 'on' ? 'on' : 'off'); // restore caller's flag
+  cfg.setMode(prevMode); // restore caller's flag (off | light | full)
 }
 
 // ---- totals ----------------------------------------------------------------
